@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: JumpLower
+  m_Mask: 01000000000000000000000001000000010000000000000000000000000000000000000001000000010000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/L.UpLeg
+    m_Weight: 1
+  - m_Path: Armature/L.UpLeg/L.LowLeg
+    m_Weight: 1
+  - m_Path: Armature/L.UpLeg/L.LowLeg/L.LowLeg_end
+    m_Weight: 1
+  - m_Path: Armature/Pelvis
+    m_Weight: 1
+  - m_Path: Armature/Pelvis/Chest
+    m_Weight: 1
+  - m_Path: Armature/Pelvis/Chest/Head
+    m_Weight: 1
+  - m_Path: Armature/Pelvis/Chest/Head/Head_end
+    m_Weight: 1
+  - m_Path: Armature/Pelvis/Chest/L.UpArm
+    m_Weight: 1
+  - m_Path: Armature/Pelvis/Chest/L.UpArm/L.LowArm
+    m_Weight: 1
+  - m_Path: Armature/Pelvis/Chest/L.UpArm/L.LowArm/L.LowArm_end
+    m_Weight: 1
+  - m_Path: Armature/Pelvis/Chest/R.UpArm
+    m_Weight: 1
+  - m_Path: Armature/Pelvis/Chest/R.UpArm/R.LowArm
+    m_Weight: 1
+  - m_Path: Armature/Pelvis/Chest/R.UpArm/R.LowArm/R.LowArm_end
+    m_Weight: 1
+  - m_Path: Armature/R.UpLeg
+    m_Weight: 1
+  - m_Path: Armature/R.UpLeg/R.LowLeg
+    m_Weight: 1
+  - m_Path: Armature/R.UpLeg/R.LowLeg/R.LowLeg_end
+    m_Weight: 1
+  - m_Path: Mball.011
+    m_Weight: 1
