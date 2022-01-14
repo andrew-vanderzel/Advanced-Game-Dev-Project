@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref tsv, turnSmoothTime);
         }
 
-        Vector3 targVel = transform.forward * movementSpeed * input.sqrMagnitude;
+        Vector3 targVel = transform.forward * movementSpeed * input.magnitude;
 
         if (movementOverride == Vector3.zero)
             rb.velocity = new Vector3(targVel.x, rb.velocity.y, targVel.z);
