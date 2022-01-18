@@ -22,6 +22,7 @@ public class BulletBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        print(other.gameObject);
         rb.velocity = Vector3.zero;
         rb.isKinematic = true;
         Invoke("DestroyBullet", 1);

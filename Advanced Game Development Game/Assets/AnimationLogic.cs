@@ -10,12 +10,13 @@ public class AnimationLogic : MonoBehaviour
     public float smoothAim;
     public float smoothAir;
     public float aimSpeed;
-    public float turnRotation;
+    public float groundCheck;
     
     private Vector3 smoothedDirection;
     private Animator anim;
     private float defaultY;
-    private bool onGround; 
+    private bool onGround;
+    
     
     private void Start()
     {
@@ -65,7 +66,7 @@ public class AnimationLogic : MonoBehaviour
     
     private bool GroundCheck()
     {
-        if (Physics.Raycast(transform.parent.position, Vector3.down, out RaycastHit hit, 0.2f))
+        if (Physics.Raycast(transform.parent.position + Vector3.up * 2, Vector3.down, out RaycastHit hit, groundCheck))
         {
             return true;
         }

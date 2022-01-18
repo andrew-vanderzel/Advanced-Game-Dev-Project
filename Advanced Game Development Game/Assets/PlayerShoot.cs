@@ -5,18 +5,28 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public GameObject bullet;
-    public Transform source;
-    public Vector3 offset;
+    public GameObject bulletMark;
+    public Transform gun;
+    private Transform mainCam;
+    
 
-    private void Update()
+    private void Start()
     {
+        mainCam = Camera.main.transform;
     }
 
     public void Shoot()
     {
-        GameObject bullet = Instantiate(this.bullet, source.position, Quaternion.identity);
-        var dir = (Camera.main.transform.forward * 100 - transform.position).normalized + offset;
-        bullet.GetComponent<Rigidbody>().velocity = dir * 25;
+        RaycastHit hit;
+        if (Physics.Raycast(mainCam.position, mainCam.forward, out hit, Mathf.Infinity))
+        {
+            if (hit.collider)
+            {
+                Instantiate(bulletMark, hit.point, Quaternion.identity);
+            }
+        }
+        
+        
     }
+
 }
