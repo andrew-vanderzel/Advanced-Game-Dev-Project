@@ -17,11 +17,15 @@ public class PlayerMovement : MonoBehaviour
     private float tsv;
     private Rigidbody rb;
     private Transform t;
+    private PlayerStats stats;
+
+    private Vector3 dir;
     
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         t = Camera.main.transform;
+        stats = GetComponent<PlayerStats>();
     }
 
     private void Update()
@@ -30,13 +34,18 @@ public class PlayerMovement : MonoBehaviour
             movementOverride = Vector3.zero;
         else
             overrideTime -= 1 * Time.deltaTime;
+        
+        Move();
     }
 
     private void FixedUpdate()
     {
-        Move();
+        if(!stats.IsDead())
+            rb.MovePosition(transform.position + dir * movementSpeed * Time.deltaTime);
+        
         Jump();
     }
+
 
     private void Jump()
     {
@@ -58,17 +67,12 @@ public class PlayerMovement : MonoBehaviour
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref tsv, turnSmoothTime);
         }
 
-        Vector3 targVel = transform.forward * movementSpeed * input.magnitude;
-
-        if (movementOverride == Vector3.zero)
-            rb.velocity = new Vector3(targVel.x, rb.velocity.y, targVel.z);
-        else
-            rb.velocity = movementOverride;
+        dir = (transform.forward * input.magnitude).normalized;
     }
     
     private bool GroundCheck()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundDistance))
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit hit, groundDistance))
         {
             return true;
         }
@@ -86,4 +90,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector3(rb.velocity.x, val, rb.velocity.z);
     }
+
+
 }
