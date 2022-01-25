@@ -55,9 +55,15 @@ public class PlayerShoot : MonoBehaviour
 
                 if (hit.collider.CompareTag("Battery"))
                 {
-                    mark = Instantiate(batteryMark, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
-                    mark.transform.parent = hit.collider.transform;
-                    
+                    EnemyStats eStats = hit.collider.transform.root.GetComponent<EnemyStats>();
+                    eStats.health -= 1;
+
+                    if (eStats.health > 0)
+                    {
+                        print("Create mark?");
+                        mark = Instantiate(batteryMark, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+                        mark.transform.parent = hit.collider.transform;
+                    }
                 }
             }
         }

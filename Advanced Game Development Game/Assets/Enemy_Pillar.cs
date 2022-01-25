@@ -17,7 +17,7 @@ public class Enemy_Pillar : Enemy
         Searching, Locked
     }
 
-    private void Update()
+    private new void Update()
     {
         if (state == PillarStates.Locked)
         {
