@@ -22,6 +22,7 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
+      <option value="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" />
       <option value="$PROJECT_DIR$/Assets/EnemyBall.cs" />
     </changedPaths>
   </component>
@@ -85,7 +86,7 @@
       <workItem from="1642869675333" duration="7765000" />
       <workItem from="1642960846239" duration="6326000" />
       <workItem from="1643120336017" duration="4592000" />
-      <workItem from="1643136235851" duration="3010000" />
+      <workItem from="1643136235851" duration="4285000" />
     </task>
     <servers />
   </component>

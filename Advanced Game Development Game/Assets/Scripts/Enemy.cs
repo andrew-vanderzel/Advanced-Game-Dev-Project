@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public bool dead;
     public ParticleSystem smoke;
     public GameObject battery;
+    public GameObject optionalEye;
     public GameObject explosion;
     public int batteryColorIndex;
     protected EnemyStats stats;
@@ -18,7 +19,6 @@ public class Enemy : MonoBehaviour
     {
         stats = GetComponent<EnemyStats>();
         currentBatteryColor = battery.GetComponent<Renderer>().materials[3].GetColor("_Color");
-
     }
 
     public void DamagePlayer(float damage)
@@ -36,6 +36,8 @@ public class Enemy : MonoBehaviour
         if (stats.health <= 0)
         {
             battery.GetComponent<Renderer>().materials[3].SetColor("_Color", currentBatteryColor);
+            if(optionalEye)
+                optionalEye.GetComponent<Renderer>().materials[1].SetColor("_Color", currentBatteryColor);
             currentBatteryColor = Color.Lerp(currentBatteryColor, Color.black, 2 * Time.deltaTime);
             explosion.SetActive(true);
             if (!dead)

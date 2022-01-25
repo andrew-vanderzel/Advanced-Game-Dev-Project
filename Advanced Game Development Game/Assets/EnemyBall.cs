@@ -42,13 +42,19 @@ public class EnemyBall : Enemy
         
         rotateForward.y = 0;
         headForward.y = 0;
-            
-        head.rotation = Quaternion.LookRotation(-headForward, Vector3.up);
+        
+        if(stats.health > 0)
+            head.rotation = Quaternion.LookRotation(-headForward, Vector3.up);
         
         head.eulerAngles = new Vector3(-90, head.eulerAngles.y, head.eulerAngles.z);
-        ball.RotateAround(ball.position, -cross, increaseFactor * Time.deltaTime);
+        ball.RotateAround(ball.position, -cross, increaseFactor * eAgent.speed * Time.deltaTime);
 
-        eAgent.destination = target.position;
+        if (stats.health > 0)
+            eAgent.destination = target.position;
+        else
+        {
+            eAgent.speed -= 2 * Time.deltaTime;
+        }
     }
 
     private void LateUpdate()
