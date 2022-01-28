@@ -2030,6 +2030,7 @@ ParticleSystem:
     - sprite: {fileID: 5016423947855932505, guid: 0841af70f1c5d854eb28558c832213c6, type: 3}
     - sprite: {fileID: 9222936549612893643, guid: 0841af70f1c5d854eb28558c832213c6, type: 3}
     - sprite: {fileID: -8405810056075184875, guid: 0841af70f1c5d854eb28558c832213c6, type: 3}
+    - sprite: {fileID: 0}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -5307,7 +5308,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7463f0542ef221241b5487c2938d1710, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5594,6 +5595,7 @@ MonoBehaviour:
   dead: 0
   smoke: {fileID: 8572419248344450992}
   battery: {fileID: 6087084654638800085}
+  optionalEye: {fileID: 0}
   explosion: {fileID: 8572419247314566348}
   batteryColorIndex: 0
   swivelBase: {fileID: 8572419247227028469}

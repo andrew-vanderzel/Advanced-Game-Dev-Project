@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public GameObject optionalEye;
     public GameObject explosion;
     public int batteryColorIndex;
+    public int eyeColorIndex = 1;
     protected EnemyStats stats;
     private Color currentBatteryColor;
 
@@ -35,9 +36,9 @@ public class Enemy : MonoBehaviour
     {
         if (stats.health <= 0)
         {
-            battery.GetComponent<Renderer>().materials[3].SetColor("_Color", currentBatteryColor);
+            battery.GetComponent<Renderer>().materials[batteryColorIndex].SetColor("_Color", currentBatteryColor);
             if(optionalEye)
-                optionalEye.GetComponent<Renderer>().materials[1].SetColor("_Color", currentBatteryColor);
+                optionalEye.GetComponent<Renderer>().materials[eyeColorIndex].SetColor("_Color", currentBatteryColor);
             currentBatteryColor = Color.Lerp(currentBatteryColor, Color.black, 2 * Time.deltaTime);
             explosion.SetActive(true);
             if (!dead)

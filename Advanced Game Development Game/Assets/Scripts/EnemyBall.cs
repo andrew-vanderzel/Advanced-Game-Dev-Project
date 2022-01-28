@@ -28,33 +28,37 @@ public class EnemyBall : Enemy
     private new void Update()
     {
         base.Update();
+        
+        BallRotation(target.position);
+    }
+
+    private void BallRotation(Vector3 endPoint)
+    {
         currentPos = transform.position;
         Vector3 ballDir = (currentPos - previousPos).normalized;
-        Vector3 headDir = (target.position - transform.position).normalized;
+        Vector3 headDir = (endPoint - transform.position).normalized;
         
         Vector3 cross = Vector3.Cross(ballDir, Vector3.up);
         Vector3 headCross = Vector3.Cross(headDir, Vector3.up);
-        currRotateDirection = Vector3.MoveTowards(currRotateDirection, cross, turnSpeed * Time.deltaTime);
+        
         currentHeadDirection = Vector3.MoveTowards(currentHeadDirection,headCross, turnSpeed * 2 * Time.deltaTime);
-        
-        Vector3 rotateForward = Vector3.Cross(currRotateDirection, Vector3.up);
         Vector3 headForward = Vector3.Cross(currentHeadDirection, Vector3.up);
-        
-        rotateForward.y = 0;
         headForward.y = 0;
         
         if(stats.health > 0)
             head.rotation = Quaternion.LookRotation(-headForward, Vector3.up);
         
         head.eulerAngles = new Vector3(-90, head.eulerAngles.y, head.eulerAngles.z);
-        ball.RotateAround(ball.position, -cross, increaseFactor * eAgent.speed * Time.deltaTime);
+        print(eAgent.velocity.magnitude * eAgent.speed * turnSpeed);
+        ball.RotateAround(ball.position, -cross, eAgent.velocity.magnitude * eAgent.speed * turnSpeed * Time.deltaTime);
 
         if (stats.health > 0)
-            eAgent.destination = target.position;
+            eAgent.destination = endPoint;
         else
         {
-            eAgent.speed -= 2 * Time.deltaTime;
+            eAgent.speed -= 0.6f * Time.deltaTime;
         }
+        
     }
 
     private void LateUpdate()

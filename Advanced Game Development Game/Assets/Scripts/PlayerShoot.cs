@@ -10,6 +10,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject batteryMark;
     public Transform gun;
     public Animator[] muzzleFlashes;
+    public LayerMask ignoreLayers;
     private Transform mainCam;
     private PlayerStats stats; 
 
@@ -38,7 +39,7 @@ public class PlayerShoot : MonoBehaviour
         }
         RaycastHit hit;
         
-        if (Physics.Raycast(mainCam.position, mainCam.forward, out hit, Mathf.Infinity))
+        if (Physics.Raycast(mainCam.position, mainCam.forward, out hit, Mathf.Infinity, ignoreLayers))
         {
             if (hit.collider)
             {
@@ -64,6 +65,11 @@ public class PlayerShoot : MonoBehaviour
                         mark = Instantiate(batteryMark, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
                         mark.transform.parent = hit.collider.transform;
                     }
+                }
+
+                if (hit.collider.CompareTag("Bullet"))
+                {
+                    hit.collider.GetComponent<HeatSeekingBullet>().ExplodeBullet();
                 }
             }
         }
