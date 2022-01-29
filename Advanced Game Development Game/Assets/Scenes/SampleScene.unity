@@ -1215,7 +1215,7 @@ Rigidbody:
   m_AngularDrag: 900
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &616201870
@@ -1908,6 +1908,7 @@ Transform:
   - {fileID: 156801105}
   - {fileID: 1341345919}
   - {fileID: 82117077}
+  - {fileID: 1546541730}
   m_Father: {fileID: 1740672164}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2418,6 +2419,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot_Ball (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2497659381053791649, guid: b278fd0eb86e09a4eb39f1c83acafd99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3018158687212685083, guid: b278fd0eb86e09a4eb39f1c83acafd99, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -2640,6 +2645,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 616201865}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1546541729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546541730}
+  m_Layer: 6
+  m_Name: Bullet Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1546541730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546541729}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.349, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1108486989}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1583470092
 PrefabInstance:
@@ -4588,6 +4623,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletMark: {fileID: 5449878272134201999, guid: a9121829857d0c641a965c5956334e57, type: 3}
   batteryMark: {fileID: 241226740439060888, guid: af7821f7fcbe682429f19d4cf1993c7c, type: 3}
+  bullet: {fileID: 8656934922505604417, guid: 0de86df511d697b4b8c86276d5163b06, type: 3}
+  bulletSource: {fileID: 1546541729}
   gun: {fileID: 1108486989}
   muzzleFlashes:
   - {fileID: 2060760561}
@@ -4630,7 +4667,7 @@ MonoBehaviour:
   spineIKScript: {fileID: 1630498651}
   pelvisTarget: {fileID: 1887229992}
   headTarget: {fileID: 2075948545}
-  aimLimit: {x: -12, y: 35}
+  aimLimit: {x: -25.53, y: 7.4}
   headLimit: {x: 12, y: 35}
   pelvisMultiplier: -31.2
   rotateSpeed: 130
@@ -5133,7 +5170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 613762567589443356, guid: df192e76815aed74ab04240cbf4a80d8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df192e76815aed74ab04240cbf4a80d8, type: 3}

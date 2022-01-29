@@ -8,6 +8,8 @@ public class PlayerShoot : MonoBehaviour
 {
     public GameObject bulletMark;
     public GameObject batteryMark;
+    public GameObject bullet;
+    public GameObject bulletSource;
     public Transform gun;
     public Animator[] muzzleFlashes;
     public LayerMask ignoreLayers;
@@ -38,43 +40,50 @@ public class PlayerShoot : MonoBehaviour
             muzzleFlashes[m].SetTrigger("Flash");
         }
         RaycastHit hit;
+
+        Vector3 defaultDirection = mainCam.forward * 10000;
         
         if (Physics.Raycast(mainCam.position, mainCam.forward, out hit, Mathf.Infinity, ignoreLayers))
         {
             if (hit.collider)
             {
-                 
-                var mark = Instantiate(bulletMark, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
-                mark.transform.parent = hit.collider.transform;
+                float dist = Vector3.Distance(transform.position, hit.point);
+                defaultDirection = (hit.point - bulletSource.transform.position).normalized;
                 
-                if (hit.collider.CompareTag("PhysicsProp"))
-                {
-                    Vector3 dir = -(hit.point - hit.collider.transform.position).normalized;
-                    Rigidbody objectRigidbody = hit.collider.gameObject.GetComponent<Rigidbody>();
-                    objectRigidbody.AddForce(dir * 5, ForceMode.Impulse);
-                }
+                    //var mark = Instantiate(bulletMark, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+                //mark.transform.parent = hit.collider.transform;
+                //
+                //if (hit.collider.CompareTag("PhysicsProp"))
+                //{
+                //    Vector3 dir = -(hit.point - hit.collider.transform.position).normalized;
+                //    Rigidbody objectRigidbody = hit.collider.gameObject.GetComponent<Rigidbody>();
+                //    objectRigidbody.AddForce(dir * 5, ForceMode.Impulse);
+                //}
 
-                if (hit.collider.CompareTag("Battery"))
-                {
-                    EnemyStats eStats = hit.collider.transform.root.GetComponent<EnemyStats>();
-                    eStats.health -= 1;
+                //if (hit.collider.CompareTag("Battery"))
+                //{
+                //    EnemyStats eStats = hit.collider.transform.root.GetComponent<EnemyStats>();
+                //    eStats.health -= 1;
 
-                    if (eStats.health > 0)
-                    {
-                        print("Create mark?");
-                        mark = Instantiate(batteryMark, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
-                        mark.transform.parent = hit.collider.transform;
-                    }
-                }
+                //    if (eStats.health > 0)
+                //    {
+                //        print("Create mark?");
+                //        mark = Instantiate(batteryMark, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+                //        mark.transform.parent = hit.collider.transform;
+                //    }
+                //}
 
-                if (hit.collider.CompareTag("Bullet"))
-                {
-                    hit.collider.GetComponent<HeatSeekingBullet>().ExplodeBullet();
-                }
+                //if (hit.collider.CompareTag("Bullet"))
+                //{
+                //    hit.collider.GetComponent<HeatSeekingBullet>().ExplodeBullet();
+                //}
             }
         }
-        
-        
+
+        GameObject instBullet = Instantiate(bullet, bulletSource.transform.position, Quaternion.identity);
+        instBullet.GetComponent<Rigidbody>().AddForce(defaultDirection * 90, ForceMode.Impulse);
+
+
     }
 
 }

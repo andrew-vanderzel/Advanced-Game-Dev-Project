@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         Yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         Pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;

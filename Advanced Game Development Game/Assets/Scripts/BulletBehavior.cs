@@ -7,25 +7,17 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour
 {
     public float speed;
+    public GameObject hitEffect;
+    
     private Rigidbody rb;
 
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    public void SetVelocity(Vector3 vel)
-    {
-        rb.velocity = vel * speed;
-    }
 
     private void OnCollisionEnter(Collision other)
     {
-        print(other.gameObject);
-        rb.velocity = Vector3.zero;
-        rb.isKinematic = true;
-        Invoke("DestroyBullet", 1);
+        var hitObj = Instantiate(hitEffect, other.contacts[0].point, Quaternion.FromToRotation(Vector3.forward, other.contacts[0].normal));
+        hitObj.transform.parent = other.collider.transform; 
+        DestroyBullet();
     }
 
     private void DestroyBullet()
