@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   hitEffect: {fileID: 5449878272134201999, guid: a9121829857d0c641a965c5956334e57, type: 3}
+  batteryHitEffect: {fileID: 241226740439060888, guid: af7821f7fcbe682429f19d4cf1993c7c, type: 3}
 --- !u!54 &4455735727728736909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -200,5 +201,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.03
   m_Center: {x: 0, y: 0, z: 0}

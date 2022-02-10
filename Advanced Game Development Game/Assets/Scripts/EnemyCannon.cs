@@ -1,12 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCannon : Enemy
 {
-    [Header("Turret Variables")]
-    public Transform swivelBase;
+    [Header("Turret Variables")] public Transform swivelBase;
+
     public Transform tiltCannon;
     public GameObject sparkObject;
     public float turnSpeed;
@@ -15,43 +12,31 @@ public class EnemyCannon : Enemy
     public LineRenderer line;
     public Transform lineSource;
     public float viewAngle;
-    public bool inView;
-    
-    private new void Start()
+
+    protected override void StandardMovement()
     {
-        base.Start();
-    }
-    
-    private new void Update()
-    {
-        base.Update();
-        
         bool lineOfSight = false;
         Vector3 dir = (target.position + Vector3.up - lineSource.position).normalized;
         Debug.DrawRay(lineSource.position, dir * 100);
-        if (Physics.Raycast(lineSource.position, dir, out var hit, 100))
-        {
+        if (Physics.Raycast(lineSource.position, dir, out RaycastHit hit, 100))
             if (hit.collider.CompareTag("Player"))
                 lineOfSight = true;
-        }
-        
-        if (stats.health > 0)
+
+        if (PlayerWithinAngle() && lineOfSight)
         {
-            if (PlayerWithinAngle() && lineOfSight)
-            {
-                line.enabled = true;
-                FaceTarget(target.position);
-                FireLaser();
-            }
-            else
-            {
-                line.enabled = false;
-            }
+            line.enabled = true;
+            FaceTarget(target.position);
+            FireLaser();
         }
         else
         {
             line.enabled = false;
         }
+    }
+
+    protected override void SpecificDeath()
+    {
+        line.enabled = false;
     }
 
     private bool PlayerWithinAngle()
@@ -70,9 +55,7 @@ public class EnemyCannon : Enemy
         {
             line.SetPosition(1, hitData.Value.point);
             if (hitData.Value.collider.CompareTag("Player"))
-            {
-                target.GetComponent<PlayerStats>().health -= 5 * Time.deltaTime; 
-            }
+                target.GetComponent<PlayerStats>().ChangeHealth(-5 * Time.deltaTime);
         }
         else
         {
@@ -82,40 +65,23 @@ public class EnemyCannon : Enemy
 
     private RaycastHit? LaserInfo()
     {
-        if (Physics.Raycast(lineSource.position, lineSource.forward, out var hit, 1000))
-        {
-            return hit;
-        }
+        if (Physics.Raycast(lineSource.position, lineSource.forward, out RaycastHit hit, 1000)) return hit;
 
         return null;
-
     }
-    
+
     private void FaceTarget(Vector3 targetPosition)
     {
         Vector3 playerDirection = (targetPosition - transform.position).normalized;
-        Vector3 swivelDir = new Vector3(playerDirection.x , 0, playerDirection.z);
+        Vector3 swivelDir = new Vector3(playerDirection.x, 0, playerDirection.z);
         Vector3 tiltDir = Vector3.right * playerDirection.y * multiplier;
         Quaternion targetRot = Quaternion.Euler(tiltDir);
 
         tiltCannon.localRotation =
             Quaternion.Lerp(tiltCannon.localRotation, targetRot, turnSpeed * Time.deltaTime);
-        
+
         Quaternion swivelRotTarget = Quaternion.LookRotation(-swivelDir, Vector3.up);
-        swivelBase.rotation = Quaternion.Lerp(swivelBase.rotation, swivelRotTarget, turnSpeed * Time.deltaTime);
-        
-    }
-
-    private void SetSpark(Vector3 point)
-    {
-        sparkObject.SetActive(true);
-        sparkObject.transform.position = point;
-        sparkObject.GetComponent<ParticleSystem>().Play();
-    }
-
-    private void HideSpark()
-    {
-        sparkObject.SetActive(false);
-        sparkObject.GetComponent<ParticleSystem>().Stop();
+        swivelBase.rotation = Quaternion.Lerp(swivelBase.rotation, swivelRotTarget,
+            turnSpeed * Time.deltaTime);
     }
 }

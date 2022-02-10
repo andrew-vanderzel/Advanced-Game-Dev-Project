@@ -23,12 +23,12 @@ public class CameraFollow : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         Yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         Pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         Pitch = Mathf.Clamp(Pitch, lookLimit.x, lookLimit.y);
-
+        
         currRotation = Vector3.SmoothDamp(currRotation, new Vector3(Pitch, Yaw), ref rotSmoothVel,
             rotationSmoothTime);
         transform.eulerAngles = currRotation;

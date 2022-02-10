@@ -34,7 +34,6 @@ public class PlayerIK : MonoBehaviour
         float spinePitch = 0.42f - Mathf.InverseLerp(aimLimit.x, aimLimit.y, m_CamFollow.Pitch) * 2;
         float headPitch = Mathf.InverseLerp(headLimit.x, headLimit.y, m_CamFollow.Pitch) * 2;
         float camY = m_CamFollow.Yaw / 2; 
-        spineIKScript.enabled = Input.GetMouseButton(0);
         m_PelvisTargetAngle = new Vector3(spinePitch * pelvisMultiplier, 0, 0);
         
         float yawClamp = Mathf.Clamp(m_CamFollow.Yaw, -44, 44);
@@ -43,7 +42,7 @@ public class PlayerIK : MonoBehaviour
             
         m_CurrPelvisAngle = Vector3.MoveTowards(m_CurrPelvisAngle, m_PelvisTargetAngle, rotateSpeed * Time.deltaTime);
 
-        var fixedCamForward = Camera.main.transform.forward;
+        Vector3 fixedCamForward = Camera.main.transform.forward;
         fixedCamForward.y = 0;
         
         angle = Vector3.SignedAngle(transform.forward, fixedCamForward, Vector3.up);

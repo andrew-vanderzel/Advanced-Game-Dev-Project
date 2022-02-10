@@ -6,26 +6,25 @@ using UnityEngine;
 
 public class AnimationLogic : MonoBehaviour
 {
-    public float smoothedAnimation;
-    public float smoothAim;
-    public float smoothAir;
-    public float aimSpeed;
-    public float groundDistance;
-    public bool onGround;
-    private bool canJump;
+    [SerializeField] private float smoothedAnimation;
+    [SerializeField] private float smoothUpperBody = 6;
+    [SerializeField] private float upperSpeed = 3;
+    [SerializeField] private float groundDistance;
     
+    private bool canJump;
     private Vector3 smoothedDirection;
     private Animator anim;
     private float defaultY;
     private PlayerStats pStats;
-    
-    
+    private Transform cam;
+    private bool isThrowing;
     
     private void Start()
     {
         anim = GetComponent<Animator>();
         defaultY = transform.localPosition.y;
         pStats = transform.root.GetComponent<PlayerStats>();
+        cam = Camera.main.transform;
     }
 
     private void Update()
@@ -33,26 +32,76 @@ public class AnimationLogic : MonoBehaviour
         if (pStats.IsDead())
         {
             anim.SetBool("dead", true);
-            smoothAim -= aimSpeed * Time.deltaTime;
-            anim.SetLayerWeight(1, smoothAim);
+            smoothUpperBody -= upperSpeed * Time.deltaTime;
+            anim.SetLayerWeight(1, smoothUpperBody);
             
             return;
         }
 
-        if (Input.GetMouseButton(0))
-            smoothAim += aimSpeed * Time.deltaTime;
-        else
-            smoothAim -= aimSpeed * Time.deltaTime;
+        UpperBodyAnimation();
 
-        if (GroundCheck())
-            smoothAir -= 7 * Time.deltaTime;
-        else
-            smoothAir += 7 * Time.deltaTime;
+        Vector3 target = WalkDirectionAnimation();
+        if (target != Vector3.zero || Input.GetMouseButton(0) || Input.GetMouseButton(1))
+        {
+            transform.eulerAngles = new Vector3(0, cam.eulerAngles.y, 0);
+        }
+        transform.localPosition = new Vector3(0, defaultY, 0);
 
+        JumpIfGrounded();
+        
+        anim.SetBool("onGround", GroundCheck());
+        
+    }
+
+    private void UpperBodyAnimation()
+    {
+        if (Input.GetMouseButton(0) || isThrowing)
+            smoothUpperBody += upperSpeed * Time.deltaTime;
+        else
+            smoothUpperBody -= upperSpeed * Time.deltaTime;
+
+        smoothUpperBody = Mathf.Clamp(smoothUpperBody, 0, 1);
+
+
+        anim.SetLayerWeight(1, smoothUpperBody);
+        
+        anim.SetBool("Shoot", Input.GetMouseButton(0));
+        if (Input.GetMouseButtonDown(1))
+        {
+            isThrowing = true;
+            anim.ResetTrigger("Throw");
+            anim.SetTrigger("Throw");
+            
+        }
+    }
+
+    public void SetThrowing()
+    {
+        isThrowing = true;
+    }
+
+    public void StopThrowing()
+    {
+        isThrowing = false;
+        anim.ResetTrigger("Throw");
+    }
+
+    private Vector3 WalkDirectionAnimation()
+    {
+        Vector3 target = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        smoothedDirection =
+            Vector3.MoveTowards(smoothedDirection, target, smoothedAnimation * Time.deltaTime);
+        anim.SetFloat("Horizontal", smoothedDirection.x);
+        anim.SetFloat("Vertical", smoothedDirection.z);
+
+        return target;
+    }
+
+    private void JumpIfGrounded()
+    {
         if (!GroundCheck() && canJump)
         {
-            canJump = false;    
-            print("jump");
+            canJump = false;
             anim.SetTrigger("Jump");
         }
 
@@ -61,31 +110,8 @@ public class AnimationLogic : MonoBehaviour
             canJump = true;
             anim.ResetTrigger("Jump");
         }
-        
-        onGround = GroundCheck();
-        
-        anim.SetBool("onGround", GroundCheck());
-        
-        smoothAim = Mathf.Clamp(smoothAim, 0, 1);
-        smoothAir = Mathf.Clamp(smoothAir, 0, 1) - (!Input.GetMouseButton(0)? 0 : 1);
-        Vector3 target = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        smoothedDirection =
-            Vector3.MoveTowards(smoothedDirection, target, smoothedAnimation * Time.deltaTime);
-        
-        anim.SetFloat("Horizontal", smoothedDirection.x);
-        anim.SetFloat("Vertical", smoothedDirection.z);
-        anim.SetLayerWeight(1, smoothAim);
-
-        if (target != Vector3.zero || Input.GetMouseButton(0))
-        {
-            Vector3 targetRotation = Vector3.up * Camera.main.transform.eulerAngles.y;
-            transform.eulerAngles = new Vector3(0, Camera.main.transform.eulerAngles.y, 0);
-            
-        }
-        transform.localPosition = new Vector3(0, defaultY, 0);
-
     }
-    
+
     private bool GroundCheck()
     {
         if (Physics.Raycast(transform.parent.position + Vector3.up, Vector3.down, out RaycastHit hit, groundDistance))

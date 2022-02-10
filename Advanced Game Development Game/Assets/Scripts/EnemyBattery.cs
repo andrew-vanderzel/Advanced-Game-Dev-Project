@@ -11,5 +11,14 @@ public class EnemyBattery : MonoBehaviour
     {
         stats = transform.root.GetComponent<EnemyStats>();
     }
-    
+
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.CompareTag("Bullet"))
+        {
+            stats.health -= 1;
+            print("hmm");
+        }
+    }
 }
