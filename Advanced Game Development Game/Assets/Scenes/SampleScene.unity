@@ -2708,15 +2708,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 613762567589443352, guid: df192e76815aed74ab04240cbf4a80d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 259.24
+      value: 300.18
       objectReference: {fileID: 0}
     - target: {fileID: 613762567589443352, guid: df192e76815aed74ab04240cbf4a80d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.001
+      value: 7.15
       objectReference: {fileID: 0}
     - target: {fileID: 613762567589443352, guid: df192e76815aed74ab04240cbf4a80d8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 546.22
+      value: 516.87
       objectReference: {fileID: 0}
     - target: {fileID: 613762567589443352, guid: df192e76815aed74ab04240cbf4a80d8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8555,7 +8555,7 @@ MonoBehaviour:
   grenade: {fileID: 260115051382014385, guid: 2a66b33b8cf33b243a7e0ccb2f555808, type: 3}
   grenadeSource: {fileID: 1733067875}
   head: {fileID: 926652797}
-  throwStrength: 20
+  throwStrength: 30
 --- !u!1 &2021674069
 GameObject:
   m_ObjectHideFlags: 0
@@ -9411,15 +9411,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6005592163973597794, guid: ec4a1a76c54b777428af274830aac4cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 227.7
+      value: 299.3
       objectReference: {fileID: 0}
     - target: {fileID: 6005592163973597794, guid: ec4a1a76c54b777428af274830aac4cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3899999
+      value: 4.494
       objectReference: {fileID: 0}
     - target: {fileID: 6005592163973597794, guid: ec4a1a76c54b777428af274830aac4cc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 521.8
+      value: 511
       objectReference: {fileID: 0}
     - target: {fileID: 6005592163973597794, guid: ec4a1a76c54b777428af274830aac4cc, type: 3}
       propertyPath: m_LocalRotation.w

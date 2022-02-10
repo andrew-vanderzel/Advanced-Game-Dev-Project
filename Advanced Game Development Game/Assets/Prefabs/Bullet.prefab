@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61fadbccf783604b92f1fe5cb5a1631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 1
   hitEffect: {fileID: 5449878272134201999, guid: a9121829857d0c641a965c5956334e57, type: 3}
   batteryHitEffect: {fileID: 241226740439060888, guid: af7821f7fcbe682429f19d4cf1993c7c, type: 3}
 --- !u!54 &4455735727728736909
