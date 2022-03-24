@@ -111,9 +111,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 613762567589443352}
+  - component: {fileID: 613762567589443359}
   - component: {fileID: 613762567589443353}
   - component: {fileID: 613762567589443358}
-  - component: {fileID: 613762567589443359}
+  - component: {fileID: 1829612034}
+  - component: {fileID: 3552086409675201570}
   m_Layer: 0
   m_Name: SawEnemy
   m_TagString: Untagged
@@ -136,48 +138,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &613762567589443353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613762567589443356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778648ad33181564ea4a0bb9efbf6492, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  dead: 0
-  smoke: {fileID: 613762568970014454}
-  battery: {fileID: 4915956015667240086}
-  optionalEye: {fileID: 4915956015667240086}
-  explosion: {fileID: 613762567938566544}
-  batteryColorIndex: 3
-  eyeColorIndex: 4
-  sawSpeed: 300
-  wheelSpeed: 130
-  saw: {fileID: 613762567771994998}
-  wheel: {fileID: 8491510344322990838}
-  turnDifference: 0
-  tiltSpeed: 0.5
-  currentTilt: 0
-  tiltMultiplier: 80
-  tiltPivot: {fileID: 613762568696347243}
---- !u!114 &613762567589443358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613762567589443356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 052f6f58d1ed77d4abdd7b884cba22df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 20
 --- !u!195 &613762567589443359
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -198,8 +158,84 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: -0.18
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 9
   m_ObstacleAvoidanceType: 4
+--- !u!114 &613762567589443353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613762567589443356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778648ad33181564ea4a0bb9efbf6492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 0
+  target: {fileID: 0}
+  smoke: {fileID: 613762568970014454}
+  battery: {fileID: 4915956015667240086}
+  optionalEye: {fileID: 4915956015667240086}
+  explosion: {fileID: 613762567938566544}
+  batteryColorIndex: 3
+  eyeColorIndex: 4
+  idleDistance: 10
+  sawSpeed: 300
+  wheelSpeed: 130
+  saw: {fileID: 613762567771994998}
+  wheel: {fileID: 8491510344322990838}
+  turnDifference: 0
+  tiltSpeed: 0.5
+  currentTilt: 0
+  tiltMultiplier: 40
+  tiltPivot: {fileID: 613762568696347243}
+--- !u!114 &613762567589443358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613762567589443356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052f6f58d1ed77d4abdd7b884cba22df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 20
+--- !u!114 &1829612034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613762567589443356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a559100af1cbb0542b64344d98e711c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewAngle: 70
+  viewDistance: 15
+  inView: 0
+  target: {fileID: 0}
+--- !u!114 &3552086409675201570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613762567589443356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eda8b058599e784d8c736cb469453ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reward: {fileID: 8169740446245247682, guid: c5f2e83e660de724dbb82b6a6b16fcc2, type: 3}
+  rewardCount: 5
+  objectCenter: {fileID: 4915956015667240086}
+  delay: 0.3
+  timer: 0
 --- !u!1 &613762567667538195
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +367,7 @@ Transform:
   m_GameObject: {fileID: 613762567771994999}
   m_LocalRotation: {x: -0, y: -0.000000016763806, z: 0.060728915, w: -0.99815434}
   m_LocalPosition: {x: 0, y: -0, z: 0.00124}
-  m_LocalScale: {x: 0.0038650557, y: 0.0038650564, z: 0.0038650564}
+  m_LocalScale: {x: 0.0040196576, y: 0.0040196585, z: 0.0040196585}
   m_Children: []
   m_Father: {fileID: 5011823328841400565}
   m_RootOrder: 2
@@ -377,7 +413,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 65552946dbc927746862bf20d61fc391, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5815,7 +5851,7 @@ GameObject:
   - component: {fileID: 4915956015667240081}
   m_Layer: 0
   m_Name: Main Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5904,7 +5940,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8970269089867782616, guid: d3528f5ddc074134b804cf09de3ac393, type: 3}
 --- !u!1 &6597367683128453602

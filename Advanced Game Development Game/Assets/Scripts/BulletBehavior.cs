@@ -9,8 +9,8 @@ public class BulletBehavior : MonoBehaviour
 {
     public float speed;
     public GameObject hitEffect;
-    public GameObject batteryHitEffect; 
-    private Rigidbody rb;
+    public GameObject batteryHitEffect;
+    protected Rigidbody rb;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -30,15 +30,18 @@ public class BulletBehavior : MonoBehaviour
         Invoke(nameof(DestroyBullet), 1f);
     }
 
-    private void CreateHitEffect(GameObject obj, Collision colInfo)
+    protected void CreateHitEffect(GameObject obj, Collision colInfo)
     {
         GameObject hitObj = Instantiate(obj, colInfo.contacts[0].point, Quaternion.FromToRotation(Vector3.forward, colInfo.contacts[0].normal));
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         hitObj.transform.parent = colInfo.collider.transform;
     }
 
-    private void DestroyBullet()
+    protected void DestroyBullet()
     {
+        ExtraDeathLogic();
         Destroy(gameObject);
     }
+
+    protected virtual void ExtraDeathLogic() { }
 }

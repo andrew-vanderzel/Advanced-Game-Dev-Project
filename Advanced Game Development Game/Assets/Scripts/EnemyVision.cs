@@ -12,7 +12,6 @@ public class EnemyVision : MonoBehaviour
     {
         Vector3 dir = (transform.position - target.position).normalized;
         float angle = Vector3.Angle(dir, -transform.forward);
-        print(angle);
         float distance = Vector3.Distance(transform.position, target.position);
         inView = angle <= viewAngle && distance < viewDistance;
     }

@@ -444,10 +444,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3018158687212685083}
+  - component: {fileID: 2449865967120824414}
   - component: {fileID: 2449865967120824411}
   - component: {fileID: 2449865967120824409}
   - component: {fileID: 2449865967120824413}
-  - component: {fileID: 2449865967120824414}
   - component: {fileID: 1063673112}
   m_Layer: 0
   m_Name: Robot_Ball
@@ -474,6 +474,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &2449865967120824414
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2497659381053791649}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1
+  m_Speed: 2
+  m_Acceleration: 3
+  avoidancePriority: 50
+  m_AngularSpeed: 5
+  m_StoppingDistance: 18
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!136 &2449865967120824411
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -513,14 +535,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a126774c1295344a5b193c7367ad57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
   target: {fileID: 0}
-  dead: 0
   smoke: {fileID: 8423179872039020769}
   battery: {fileID: 8086142836425340664}
   optionalEye: {fileID: 5912235213582292188}
   explosion: {fileID: 7768940313543843753}
   batteryColorIndex: 3
   eyeColorIndex: 1
+  idleDistance: 0
   ball: {fileID: 3115765136952702625}
   head: {fileID: 4838378822961497496}
   currRotateDirection: {x: 0, y: 0, z: 0}
@@ -528,28 +551,6 @@ MonoBehaviour:
   increaseFactor: 100
   movementSpeed: 80
   turnSpeed: 40
---- !u!195 &2449865967120824414
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2497659381053791649}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 1
-  m_Speed: 2
-  m_Acceleration: 3
-  avoidancePriority: 50
-  m_AngularSpeed: 5
-  m_StoppingDistance: 18
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &1063673112
 MonoBehaviour:
   m_ObjectHideFlags: 0

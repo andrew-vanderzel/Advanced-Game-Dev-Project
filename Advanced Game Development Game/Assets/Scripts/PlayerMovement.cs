@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private float turnSmoothTime = 0.2f;
     
-    private float groundDistance = 1.02f;
+    private float groundDistance = 1.6f;
     private float _overrideTime;
     private Vector3 _movementOverride;
     private float _tsv;

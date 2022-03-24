@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerJetpack : MonoBehaviour
 {
     public float ChargeAmount { get; private set; }
+    public float maxCharge = 100;
     [SerializeField] private float consumptionSpeed;
     [SerializeField] private float rechargeSpeed;
     [SerializeField] private float strength;
@@ -16,6 +17,7 @@ public class PlayerJetpack : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _pMovement = GetComponent<PlayerMovement>();
+        ChargeAmount = maxCharge;
     }
 
     private void Update()
@@ -38,11 +40,13 @@ public class PlayerJetpack : MonoBehaviour
             Vector3 targetVelocity = new Vector3
             {
                 x = _pMovement.MoveInput().x,
-                y = Mathf.MoveTowards(_rb.velocity.y, strength, 6 * Time.deltaTime),
+                y = _rb.velocity.y,
                 z = _pMovement.MoveInput().z
             };
-
+            targetVelocity.y += 0.6f * Time.deltaTime;
+            targetVelocity.y = Mathf.Clamp(targetVelocity.y, 0, strength);
             _rb.velocity = targetVelocity;
+            
             _pMovement.SetMovementOverride(targetVelocity, 0.2f);
         }
     }
@@ -50,7 +54,7 @@ public class PlayerJetpack : MonoBehaviour
     private void JetpackFuelLogic()
     {
         
-        ChargeAmount = Mathf.Clamp(ChargeAmount, 0, 100);
+        ChargeAmount = Mathf.Clamp(ChargeAmount, 0, maxCharge);
         _chargeDelay += 1 * Time.deltaTime;
         _canJetpack = ChargeAmount > 2;
         

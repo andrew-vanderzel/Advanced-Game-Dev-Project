@@ -15,10 +15,10 @@ public class EnemyBattery : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        print("Collision");
         if (other.collider.CompareTag("Bullet"))
         {
             stats.health -= 1;
-            print("hmm");
         }
     }
 }

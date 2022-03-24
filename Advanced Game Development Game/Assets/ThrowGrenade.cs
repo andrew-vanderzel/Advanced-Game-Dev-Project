@@ -7,16 +7,21 @@ public class ThrowGrenade : MonoBehaviour
 {
     public GameObject grenade;
     public Transform grenadeSource;
-    public GameObject head;
     public float throwStrength;
 
     private Rigidbody rb;
 
     public void Throw()
     {
-        print("Throwing");
+        FindObjectOfType<PlayerStats>().grenades -= 1;
         GameObject gInst = Instantiate(grenade, grenadeSource.position, Quaternion.identity);
         rb = gInst.GetComponent<Rigidbody>();
-        rb.AddForce(Camera.main.transform.forward * throwStrength, ForceMode.Impulse); 
+        
+        float x = Screen.width / 2f;
+        float y = Screen.height / 2f;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(x, y, 0));
+        Vector3 shootDir = ray.direction.normalized;
+        
+        rb.AddForce(shootDir * throwStrength, ForceMode.Impulse); 
     }
 }

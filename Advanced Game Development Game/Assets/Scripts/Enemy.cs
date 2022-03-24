@@ -92,6 +92,9 @@ public class Enemy : MonoBehaviour
 
     private void IdleBehavior()
     {
+        if (!eAgent)
+            return;
+        
         if (eAgent.remainingDistance - eAgent.stoppingDistance < 1)
         {
             Vector3 idleTarget = _originalPosition + Random.insideUnitSphere * idleDistance;

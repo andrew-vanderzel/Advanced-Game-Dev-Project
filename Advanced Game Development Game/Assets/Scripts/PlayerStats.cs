@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    public int grenades;
+    public int batteries;
     public float Health { get; private set; }
     public float JetpackCharge { get; set; }
 

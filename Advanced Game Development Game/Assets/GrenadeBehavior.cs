@@ -10,7 +10,7 @@ public class GrenadeBehavior : MonoBehaviour
     public GameObject explosionPrefab;
     public float detectStrength;
     public float seekStrength;
-    
+
     private Rigidbody rb;
     
     
@@ -34,9 +34,11 @@ public class GrenadeBehavior : MonoBehaviour
 
             foreach (var e in FindObjectsOfType<EnemyStats>())
             {
-                float distance = Vector3.Distance(e.transform.position, transform.position);
+                if(e.transform.childCount == 0)
+                    continue;
+                float distance = Vector3.Distance(e.transform.GetChild(0).position, transform.position);
 
-                if (distance < 2)
+                if (distance < 1.6f)
                 {
                     e.health -= 10;
                 }
@@ -44,24 +46,15 @@ public class GrenadeBehavior : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
-        float closest = 20;
-        GameObject targetEnemy = null;
-        foreach (var enemy in FindObjectsOfType<Enemy>())
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.CompareTag("Enemy"))
         {
-            float dist = Vector3.Distance(transform.position, enemy.transform.position);
-
-            if (dist < closest)
-            {
-                closest = dist;
-                targetEnemy = enemy.gameObject;
-            }
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+            rb.isKinematic = true;
+            transform.parent = other.transform;
         }
-
-        if (!targetEnemy) return;
-
-        Vector3 dir = (targetEnemy.transform.position - transform.position).normalized;
-        rb.AddForce(dir * seekStrength, ForceMode.Acceleration);    
-         
     }
 }

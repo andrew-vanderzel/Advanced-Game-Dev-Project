@@ -10,7 +10,7 @@ public class AnimationLogic : MonoBehaviour
     [SerializeField] private float smoothUpperBody = 6;
     [SerializeField] private float upperSpeed = 3;
     [SerializeField] private float groundDistance;
-    
+    public bool grounded; 
     private bool canJump;
     private Vector3 smoothedDirection;
     private Animator anim;
@@ -29,6 +29,7 @@ public class AnimationLogic : MonoBehaviour
 
     private void Update()
     {
+        grounded = GroundCheck();
         if (pStats.IsDead())
         {
             anim.SetBool("dead", true);
@@ -66,7 +67,7 @@ public class AnimationLogic : MonoBehaviour
         anim.SetLayerWeight(1, smoothUpperBody);
         
         anim.SetBool("Shoot", Input.GetMouseButton(0));
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && pStats.grenades > 0)
         {
             isThrowing = true;
             anim.ResetTrigger("Throw");

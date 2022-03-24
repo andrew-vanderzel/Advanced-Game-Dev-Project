@@ -109,8 +109,6 @@ public class EnemyFlying : Enemy
          Vector3 randomForce = _rb.gameObject.transform.up * Random.Range(10, 30) * (Random.value > 0.5f ? 1 : -1);
          _rb.velocity = -deathDirection;
       }
-      Debug.DrawRay(previousChild.transform.position, -deathDirection * 100, Color.magenta);
-      
    }
    
    private void LateUpdate()

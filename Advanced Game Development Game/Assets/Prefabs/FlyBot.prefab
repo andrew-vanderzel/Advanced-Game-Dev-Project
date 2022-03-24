@@ -193,9 +193,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6005592163973597794}
+  - component: {fileID: 6005592163973597792}
   - component: {fileID: 6005592163973597797}
   - component: {fileID: 6005592163973597795}
-  - component: {fileID: 6005592163973597792}
+  - component: {fileID: 1738278620}
+  - component: {fileID: 1738278621}
   m_Layer: 0
   m_Name: FlyBot
   m_TagString: Untagged
@@ -218,6 +220,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &6005592163973597792
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6005592163973597796}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 5
+  m_Acceleration: 3
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 8
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: -1.24
+  m_WalkableMask: 24
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &6005592163973597797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,15 +254,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464d07c2780d5f64cafe857b9833a144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
   target: {fileID: 0}
-  dead: 0
   smoke: {fileID: 6005592164050549685}
   battery: {fileID: 8202977539220987292}
   optionalEye: {fileID: 8202977539220987292}
   explosion: {fileID: 6005592165526149300}
   batteryColorIndex: 2
   eyeColorIndex: 5
-  turnSpeed: 2
+  idleDistance: 20
+  turnSpeed: 4
   batteryOne: {fileID: 6005592164965839885}
   batteryTwo: {fileID: 6005592165595990850}
   propeller: {fileID: 6005592164240043817}
@@ -255,29 +280,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052f6f58d1ed77d4abdd7b884cba22df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
---- !u!195 &6005592163973597792
-NavMeshAgent:
+  health: 6
+--- !u!114 &1738278620
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6005592163973597796}
   m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 2
-  m_Acceleration: 3
-  avoidancePriority: 50
-  m_AngularSpeed: 60
-  m_StoppingDistance: 8
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: -1.24
-  m_WalkableMask: 24
-  m_ObstacleAvoidanceType: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a559100af1cbb0542b64344d98e711c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewAngle: 70
+  viewDistance: 15
+  inView: 0
+  target: {fileID: 0}
+--- !u!114 &1738278621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6005592163973597796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eda8b058599e784d8c736cb469453ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reward: {fileID: 8169740446245247682, guid: c5f2e83e660de724dbb82b6a6b16fcc2, type: 3}
+  rewardCount: 5
+  objectCenter: {fileID: 8202977539220987292}
+  delay: 0.3
+  timer: 0
 --- !u!1 &6005592164013443726
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6005592164013443726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.059, z: 0}
+  m_LocalPosition: {x: 0, y: 3.476, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9029846440444259622}
@@ -5713,7 +5749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 8656934922505604417, guid: 0de86df511d697b4b8c86276d5163b06, type: 3}
   bulletSource: {fileID: 6005592164874154133}
-  fireRate: 0.3
+  fireRate: 0.15
   timer: 0
   inAngle: 0
   target: {fileID: 0}
@@ -5925,7 +5961,7 @@ GameObject:
   - component: {fileID: 8202977539220987290}
   m_Layer: 0
   m_Name: Main body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6026,9 +6062,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8202977539220987292}
   serializedVersion: 2
-  m_Mass: 100
-  m_Drag: 30
-  m_AngularDrag: 2
+  m_Mass: 200
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0

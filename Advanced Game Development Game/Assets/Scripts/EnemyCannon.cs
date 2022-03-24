@@ -16,7 +16,7 @@ public class EnemyCannon : Enemy
     protected override void StandardMovement()
     {
         bool lineOfSight = false;
-        Vector3 dir = (target.position + Vector3.up - lineSource.position).normalized;
+        Vector3 dir = (target.position - lineSource.position);
         Debug.DrawRay(lineSource.position, dir * 100);
         if (Physics.Raycast(lineSource.position, dir, out RaycastHit hit, 100))
             if (hit.collider.CompareTag("Player"))
