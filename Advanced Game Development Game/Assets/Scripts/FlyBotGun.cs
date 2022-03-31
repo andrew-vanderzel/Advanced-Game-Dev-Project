@@ -25,7 +25,7 @@ public class FlyBotGun : MonoBehaviour
 
     private void Update()
     {
-        if (eStats.health <= 0 || !_enemyScript.IsAttackMode())
+        if (eStats.Health <= 0 || !_enemyScript.IsAttackMode())
             return;
         
         Vector3 targetOffset = target.position;
@@ -43,6 +43,7 @@ public class FlyBotGun : MonoBehaviour
                 timer = fireRate;
                 GameObject bulletInst = Instantiate(bullet, bulletSource.position, Quaternion.identity);
                 bulletInst.GetComponent<Rigidbody>().velocity = bulletSource.forward * 28;
+                AudioPlayer.ap.PlayShootSound();
             }
 
             timer -= 1 * Time.deltaTime;

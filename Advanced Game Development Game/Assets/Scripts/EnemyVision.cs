@@ -8,6 +8,11 @@ public class EnemyVision : MonoBehaviour
     public bool inView;
     public Transform target;
 
+    private void Start()
+    {
+        target = GetComponent<Enemy>().target;
+    }
+
     private void Update()
     {
         Vector3 dir = (transform.position - target.position).normalized;

@@ -31,7 +31,7 @@ public class CameraFollow : MonoBehaviour
     {
         Cursor.visible = terminalScript.IsMenuOpen();
         Cursor.lockState = !terminalScript.IsMenuOpen()? CursorLockMode.Locked : CursorLockMode.None;
-        Time.timeScale = terminalScript.IsMenuOpen() ? 0 : 1;
+        Time.timeScale = terminalScript.IsMenuOpen() ? 0.5f : 1;
         if (terminalScript.IsMenuOpen())
             return;
         

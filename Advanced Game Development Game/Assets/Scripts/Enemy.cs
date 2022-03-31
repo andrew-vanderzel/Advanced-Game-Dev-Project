@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (mode == EnemyMode.Attack)
+        if (mode == EnemyMode.Attack && stats.Health > 0)
         {
             AttackBehavior();
         }
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
             SpecificDeath();
         }
 
-        if (stats.health <= 0)
+        if (stats.Health <= 0)
         {
             mode = EnemyMode.Dead;;
         }
@@ -92,10 +92,7 @@ public class Enemy : MonoBehaviour
 
     private void IdleBehavior()
     {
-        if (!eAgent)
-            return;
-        
-        if (eAgent.remainingDistance - eAgent.stoppingDistance < 1)
+        if (eAgent.remainingDistance < 0.7f)
         {
             Vector3 idleTarget = _originalPosition + Random.insideUnitSphere * idleDistance;
 
@@ -134,6 +131,8 @@ public class Enemy : MonoBehaviour
 
         if (!_dead)
         {
+            print("Did play?");
+            AudioPlayer.ap.PlayExplosionSound();
             smoke.Play();
             _dead = true;
         }

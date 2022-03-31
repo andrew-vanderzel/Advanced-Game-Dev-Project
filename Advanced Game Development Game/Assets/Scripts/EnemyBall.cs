@@ -47,7 +47,7 @@ public class EnemyBall : Enemy
         Vector3 headForward = Vector3.Cross(currentHeadDirection, Vector3.up);
         headForward.y = 0;
 
-        if (stats.health > 0)
+        if (stats.Health > 0)
             head.rotation = Quaternion.LookRotation(-headForward, Vector3.up);
         head.eulerAngles = new Vector3(-90, head.eulerAngles.y, head.eulerAngles.z);
     }

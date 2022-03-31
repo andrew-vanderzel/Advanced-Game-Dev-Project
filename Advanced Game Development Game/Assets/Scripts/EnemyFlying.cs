@@ -40,7 +40,7 @@ public class EnemyFlying : Enemy
       moveDir.y = 0;
       
       propeller.Rotate(new Vector3(0, _propSpeed * Time.deltaTime, 0), Space.Self);
-      if (stats.health <= 0)
+      if (stats.Health <= 0)
       {
          SpecificDeath();
          return;

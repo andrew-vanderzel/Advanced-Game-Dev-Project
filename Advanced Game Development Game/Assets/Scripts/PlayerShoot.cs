@@ -52,6 +52,8 @@ public class PlayerShoot : MonoBehaviour
         GameObject instBullet = Instantiate(bullet, bulletSource.transform.position, Quaternion.identity);
         instBullet.GetComponent<Rigidbody>().velocity =
             shootDir * 120 * instBullet.GetComponent<BulletBehavior>().speed;
+        
+        AudioPlayer.ap.PlayShootSound();
     }
 
     private Vector3 CalculateDirection()

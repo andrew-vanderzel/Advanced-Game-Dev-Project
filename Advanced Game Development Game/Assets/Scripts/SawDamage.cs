@@ -8,7 +8,7 @@ public class SawDamage : MonoBehaviour
     {
         if (other.GetComponent<Collider>().CompareTag("Player"))
         {
-            if(transform.root.GetComponent<EnemyStats>().health > 0)
+            if(transform.root.GetComponent<EnemyStats>().Health > 0)
                 other.GetComponent<PlayerStats>().ChangeHealth(-damage * Time.deltaTime); 
         }
     }

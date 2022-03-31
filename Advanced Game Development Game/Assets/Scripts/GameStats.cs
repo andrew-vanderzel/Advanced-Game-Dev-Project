@@ -30,6 +30,6 @@ public class GameStats : MonoBehaviour
 
     private void Update()
     {
-        enemiesRemaining = FindObjectsOfType<EnemyStats>().Count(i => i.health > 0);
+        enemiesRemaining = FindObjectsOfType<EnemyStats>().Count(i => i.Health > 0);
     }
 }

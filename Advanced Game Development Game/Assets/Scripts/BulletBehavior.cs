@@ -16,7 +16,13 @@ public class BulletBehavior : MonoBehaviour
     {
         if (other.collider.CompareTag("Battery"))
         {
-            if (other.collider.transform.root.GetComponent<EnemyStats>().health > 0 && !other.collider.CompareTag("Player"))
+            if (other.collider.GetComponent<BossBattery>())
+            {
+                CreateHitEffect(batteryHitEffect, other);
+                return;
+            }
+            
+            if (other.collider.transform.root.GetComponent<EnemyStats>().Health > 0 && !other.collider.CompareTag("Player"))
             {
                 CreateHitEffect(batteryHitEffect, other);
                 transform.position = Vector3.up;
@@ -32,9 +38,12 @@ public class BulletBehavior : MonoBehaviour
 
     protected void CreateHitEffect(GameObject obj, Collision colInfo)
     {
-        GameObject hitObj = Instantiate(obj, colInfo.contacts[0].point, Quaternion.FromToRotation(Vector3.forward, colInfo.contacts[0].normal));
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        hitObj.transform.parent = colInfo.collider.transform;
+        if (!colInfo.collider.CompareTag("Boss"))
+        {
+            GameObject hitObj = Instantiate(obj, colInfo.contacts[0].point, Quaternion.FromToRotation(Vector3.forward, colInfo.contacts[0].normal));
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            hitObj.transform.parent = colInfo.collider.transform;
+        }
     }
 
     protected void DestroyBullet()

@@ -21,7 +21,7 @@ public class EnemyRocketLauncher : MonoBehaviour
 
     private void Update()
     {
-        if (GetComponent<EnemyStats>().health <= 0)
+        if (GetComponent<EnemyStats>().Health <= 0)
             return;
 
         if (enemyScript.mode == Enemy.EnemyMode.Attack)

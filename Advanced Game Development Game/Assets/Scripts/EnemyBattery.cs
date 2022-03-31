@@ -18,7 +18,9 @@ public class EnemyBattery : MonoBehaviour
         print("Collision");
         if (other.collider.CompareTag("Bullet"))
         {
-            stats.health -= 1;
+            stats.Health -= 1;
+            transform.root.GetComponent<Enemy>().mode = Enemy.EnemyMode.Attack;
+            
         }
     }
 }

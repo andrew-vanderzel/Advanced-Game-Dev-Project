@@ -23,13 +23,15 @@ public class PlayerStats : MonoBehaviour
 
     public void ChangeHealth(float val)
     {
+        print("huh?");
+        AudioPlayer.ap.PlayDamageSound();
         Health += val;
     }
     private void OnCollisionEnter(Collision other)
     {
         if (other.collider.CompareTag("Bullet"))
         {
-            Health -= 1;
+            ChangeHealth(-1);
         }
     }
 }
