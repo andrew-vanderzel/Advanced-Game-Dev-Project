@@ -30,14 +30,18 @@ public class ScreenFader : MonoBehaviour
         {
             Color c = fader.color;
             c.a -= speed * Time.deltaTime;
+            c.a = Mathf.Clamp(c.a, 0, 1);
             fader.color = c;
         }
         else
         {
             Color c = fader.color;
             c.a += speed * Time.deltaTime;
+            c.a = Mathf.Clamp(c.a, 0, 1);
             fader.color = c;
         }
+        
+        
 
         if (fadeDirection == Directions.Out && fader.color.a >= 1)
         {

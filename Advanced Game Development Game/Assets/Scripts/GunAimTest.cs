@@ -13,11 +13,5 @@ public class GunAimTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, transform.up, out hit, 2000))
-        {
-            Debug.DrawLine(transform.position, hit.point);
-        }
     }
 }

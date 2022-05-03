@@ -12,11 +12,13 @@ public class PlayerJetpack : MonoBehaviour
     private bool _canJetpack;
     private Rigidbody _rb;
     private PlayerMovement _pMovement;
+    private JetpackParticles _jetpackParticles;
     
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _pMovement = GetComponent<PlayerMovement>();
+        _jetpackParticles = FindObjectOfType<JetpackParticles>();
         ChargeAmount = maxCharge;
     }
 
@@ -31,12 +33,16 @@ public class PlayerJetpack : MonoBehaviour
     
     private void MovePlayer()
     {
+        if(!Input.GetKey(KeyCode.LeftShift) || !_canJetpack)
+           _jetpackParticles.StopParticles();
+        
         if (!Input.GetKey(KeyCode.LeftShift)) return;
         
         ChargeAmount -= 40 * Time.deltaTime;
 
         if (_canJetpack)
         {
+            _jetpackParticles.StartParticles();
             Vector3 targetVelocity = new Vector3
             {
                 x = _pMovement.MoveInput().x,

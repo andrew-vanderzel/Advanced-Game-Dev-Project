@@ -19,7 +19,7 @@ public class Transporter : MonoBehaviour
         fadeIn = false;
         fadeImage.color = Color.black;
         GetComponent<MeshRenderer>().enabled = true;
-        
+        fadeImage.enabled = false;
     }
 
     private void Update()
@@ -38,6 +38,7 @@ public class Transporter : MonoBehaviour
         
         if (objective.objectives.Count == 0 && !fadeBack)
         {
+            fadeImage.enabled = true;
             GetComponent<MeshRenderer>().enabled = true;
             Color fadeColor = fadeImage.color;
             fadeColor.a += 0.5f * Time.deltaTime;
@@ -45,9 +46,11 @@ public class Transporter : MonoBehaviour
 
             if (fadeImage.color.a >= 1)
             {
+                
                 player.transform.position = teleportLocation;
                 player.transform.eulerAngles = targetRotation;
                 FindObjectOfType<MusicSystem>().NextSong();
+                FindObjectOfType<TitleCardTrigger>().SetTitle("Level 2", "The factory");
                 fadeBack = true;
             }
 

@@ -14,6 +14,12 @@ public class ShopScript : MonoBehaviour
     public Text grenadeText;
     public Text batteryText;
     public Text scrapText;
+    public Text bulletUpgradeText;
+    public Text bulletUpgradeLabel;
+    public Text jetpackUpgradeText;
+    public Text jetpackUpgradeLabel;
+    public Button bulletUpgradeButton;
+    public Button jetpackUpgradeButton;
     private GameStats stats;
     private PlayerStats pStats;
     private int batteryUpgrade;
@@ -27,8 +33,8 @@ public class ShopScript : MonoBehaviour
 
     private void Update()
     {
-        grenadeText.text = "Grenades: " + pStats.grenades.ToString("00");
-        scrapText.text = "Scrap: " + stats.scrapAmount.ToString("00");
+        grenadeText.text = pStats.grenades.ToString("00");
+        scrapText.text = stats.scrapAmount.ToString("00");
         batteryText.text = "Batteries: " + pStats.batteries.ToString("00");
     }
 
@@ -43,7 +49,6 @@ public class ShopScript : MonoBehaviour
 
     public void Close()
     {
-        print("Hello");
         gameObject.SetActive(false);
     }
 
@@ -63,6 +68,15 @@ public class ShopScript : MonoBehaviour
             stats.scrapAmount -= jetpackUpgradeCosts[batteryUpgrade];
             FindObjectOfType<PlayerJetpack>().maxCharge += 100;
             batteryUpgrade += 1;
+            jetpackUpgradeLabel.text = "Jetpack Max Charge (" + batteryUpgrade + "/3)";
+            stats.scrapAmount -= 10;
+        }
+
+        if (batteryUpgrade == 3)
+        {
+            jetpackUpgradeLabel.text = "All Unlocked";
+            jetpackUpgradeText.text = "-";
+            jetpackUpgradeButton.interactable = false;
         }
 
         batteryUpgrade = Mathf.Clamp(batteryUpgrade, 1, 2);
@@ -77,6 +91,8 @@ public class ShopScript : MonoBehaviour
             if (stats.scrapAmount >= bulletUpgrade[0])
             {
                 FindObjectOfType<BulletChooser>().bulletUnlocks[1] = 1;
+                bulletUpgradeText.text = bulletUpgrade[1].ToString();
+                bulletUpgradeLabel.text = "Explosive Bullet";
                 stats.scrapAmount -= bulletUpgrade[0];
             }
         }
@@ -85,7 +101,10 @@ public class ShopScript : MonoBehaviour
             if (stats.scrapAmount >= bulletUpgrade[1])
             {
                 FindObjectOfType<BulletChooser>().bulletUnlocks[2] = 1;
+                bulletUpgradeText.text = "-";
+                bulletUpgradeLabel.text = "All Unlocked";
                 stats.scrapAmount -= bulletUpgrade[1];
+                bulletUpgradeButton.interactable = false;
             }
         }
     }

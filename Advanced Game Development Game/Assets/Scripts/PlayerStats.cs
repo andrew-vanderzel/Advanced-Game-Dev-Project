@@ -21,17 +21,17 @@ public class PlayerStats : MonoBehaviour
         return Health <= 0;
     }
 
-    public void ChangeHealth(float val)
+    public void ChangeHealth(float val, bool playAutoSound)
     {
-        print("huh?");
-        AudioPlayer.ap.PlayDamageSound();
+        if(playAutoSound)
+            AudioPlayer.ap.PlayDamageSound();
         Health += val;
     }
     private void OnCollisionEnter(Collision other)
     {
         if (other.collider.CompareTag("Bullet"))
         {
-            ChangeHealth(-1);
+            ChangeHealth(-1, true);
         }
     }
 }

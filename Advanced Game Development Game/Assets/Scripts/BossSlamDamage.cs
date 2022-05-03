@@ -12,7 +12,7 @@ public class BossSlamDamage : MonoBehaviour
     {
         if (playerInRadius)
         {
-            FindObjectOfType<PlayerStats>().ChangeHealth(-damage);
+            FindObjectOfType<PlayerStats>().ChangeHealth(-damage, true);
         }
     }
     

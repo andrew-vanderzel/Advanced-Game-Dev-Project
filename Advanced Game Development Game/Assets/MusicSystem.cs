@@ -33,7 +33,7 @@ public class MusicSystem : MonoBehaviour
 
         if (!doorHadOpened)
         {
-            songSource.volume = Mathf.Clamp(1 - fadeImage.color.a, 0, 0.6f);
+            songSource.volume = Mathf.Clamp(1 - fadeImage.color.a, 0, 0.25f);
         }
         else
         {

@@ -24,7 +24,7 @@ public class EnemyFlying : Enemy
    {
       base.Start();
       _rb = transform.GetChild(0).GetChild(0).GetComponent<Rigidbody>();
-      _propSpeed = 600;
+      _propSpeed = 1000;
       currentPosition = transform.position;
       previousPosition = transform.position;
       _previousY = transform.eulerAngles.y;
@@ -61,7 +61,6 @@ public class EnemyFlying : Enemy
       if (transform.childCount == 0)
          return;
       
-      _smoothMoveDir = Vector3.Lerp(_smoothMoveDir, moveDir, smoothMoveVal * Time.deltaTime);
       float moveInfluence = _smoothMoveDir.magnitude * 500;
       float yChange = _currentY - _previousY;
       yChange = Mathf.Clamp(yChange, -2, 2); _smoothY = Mathf.Lerp(_smoothY, yChange * -120, smoothYVal * Time.deltaTime);
@@ -83,10 +82,9 @@ public class EnemyFlying : Enemy
    {
       
       Vector3 targetOffset = target.position;
-      targetOffset.y += 2;
+      targetOffset.y += 0.5f;
       Vector3 playerDir = (targetOffset - gunPivot.position).normalized;
-      Debug.DrawRay(gunPivot.position, playerDir * 3, Color.green); 
-      Vector3 tiltDir = Vector3.up * playerDir.y * 120;
+      Vector3 tiltDir = Vector3.up * playerDir.y * 80;
       Quaternion quatTarg = Quaternion.Euler(tiltDir);
       
       gunPivot.localRotation = Quaternion.Lerp(gunPivot.localRotation, quatTarg, gunTiltSpeed * Time.deltaTime);

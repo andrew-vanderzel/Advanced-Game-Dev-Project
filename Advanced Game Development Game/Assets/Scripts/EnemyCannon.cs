@@ -12,6 +12,7 @@ public class EnemyCannon : Enemy
     public LineRenderer line;
     public Transform lineSource;
     public float viewAngle;
+    public Transform laserParticle;
 
     protected override void StandardMovement()
     {
@@ -31,17 +32,21 @@ public class EnemyCannon : Enemy
         else
         {
             line.enabled = false;
+            laserParticle.transform.position = Vector3.one * 1000000;
         }
     }
 
     protected override void SpecificDeath()
     {
         line.enabled = false;
+        laserParticle.transform.position = Vector3.one * 1000000;
     }
 
     private bool PlayerWithinAngle()
     {
-        Vector3 dir = (target.position - lineSource.position).normalized;
+        Vector3 targetOffset = target.position;
+        targetOffset.y += 0.5f;
+        Vector3 dir = (targetOffset - lineSource.position).normalized;
         float angle = Vector3.Angle(dir, lineSource.forward);
         return angle < viewAngle;
     }
@@ -55,7 +60,12 @@ public class EnemyCannon : Enemy
         {
             line.SetPosition(1, hitData.Value.point);
             if (hitData.Value.collider.CompareTag("Player"))
-                target.GetComponent<PlayerStats>().ChangeHealth(-5 * Time.deltaTime);
+                target.GetComponent<PlayerStats>().ChangeHealth(-5 * Time.deltaTime, false);
+
+            Vector3 targetRotation = hitData.Value.normal;
+            targetRotation.x -= 90;
+            laserParticle.eulerAngles = targetRotation;
+            laserParticle.transform.position = hitData.Value.point;
         }
         else
         {

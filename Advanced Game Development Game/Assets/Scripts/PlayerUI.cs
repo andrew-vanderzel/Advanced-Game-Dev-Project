@@ -35,7 +35,7 @@ public class PlayerUI : MonoBehaviour
             slotOutlines[i].gameObject.SetActive(_bulletChooser.bulletUnlocks[i] == 1);
         }
 
-        scrapText.text = "Scrap: " + gStats.scrapAmount.ToString("00");
-        grenadeText.text = "Grenades: " + stats.grenades.ToString("00");
+        scrapText.text = gStats.scrapAmount.ToString();
+        grenadeText.text = stats.grenades.ToString();
     }
 }

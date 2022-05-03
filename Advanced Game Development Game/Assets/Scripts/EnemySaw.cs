@@ -15,6 +15,7 @@ public class EnemySaw : Enemy
     public float currentTilt;
     public float tiltMultiplier;
     public Transform tiltPivot;
+    public bool toInspect;
 
     private float _previousY;
     private float _currentY;

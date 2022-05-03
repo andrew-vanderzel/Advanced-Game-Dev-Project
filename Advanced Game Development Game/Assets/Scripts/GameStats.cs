@@ -31,5 +31,6 @@ public class GameStats : MonoBehaviour
     private void Update()
     {
         enemiesRemaining = FindObjectsOfType<EnemyStats>().Count(i => i.Health > 0);
+        scrapAmount = Mathf.Clamp(scrapAmount, 0, 99);
     }
 }

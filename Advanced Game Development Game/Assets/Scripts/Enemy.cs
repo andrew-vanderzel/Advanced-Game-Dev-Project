@@ -19,7 +19,9 @@ public class Enemy : MonoBehaviour
     public GameObject explosion;
     public int batteryColorIndex;
     public int eyeColorIndex = 1;
-    
+    public GameObject exclamationObject;
+    public float exclamationOffset;
+     
     [Header("Idle Behavior")] public float idleDistance;
 
     private Color _currentBatteryColor;
@@ -27,7 +29,7 @@ public class Enemy : MonoBehaviour
     private bool _dead;
     private Vector3 _originalPosition;
     protected Vector3 currentPosition;
-
+    private bool _seenPlayer;
 
     protected NavMeshAgent eAgent;
     protected Vector3 previousPosition;
@@ -41,27 +43,12 @@ public class Enemy : MonoBehaviour
         eAgent = GetComponent<NavMeshAgent>();
         stats = GetComponent<EnemyStats>();
         _currentBatteryColor = battery.GetComponent<Renderer>().materials[3].GetColor("_Color");
+        _seenPlayer = false;
     }
 
     public void Update()
     {
         StandardMovement();
-
-        if (mode == EnemyMode.Idle)
-        {
-            IdleBehavior();
-
-            if (visionScript.CanSeePlayer())
-            {
-                mode = EnemyMode.Attack;
-            }
-        }
-
-        if (mode == EnemyMode.Attack && stats.Health > 0)
-        {
-            AttackBehavior();
-        }
-
         if (mode == EnemyMode.Dead)
         {
             BaseDeath();
@@ -70,8 +57,34 @@ public class Enemy : MonoBehaviour
 
         if (stats.Health <= 0)
         {
-            mode = EnemyMode.Dead;;
+            mode = EnemyMode.Dead;
+            return;
         }
+
+        if (mode == EnemyMode.Idle)
+        {
+            IdleBehavior();
+
+            if (visionScript.CanSeePlayer())
+            {
+                
+                mode = EnemyMode.Attack;
+            }
+        }
+
+        if (mode == EnemyMode.Attack && stats.Health > 0)
+        {
+            
+            if (!_seenPlayer)
+            {
+                var ex = Instantiate(exclamationObject, transform.position, Quaternion.identity);
+                ex.GetComponent<ExclamationIcon>().enemy = gameObject;
+                ex.GetComponent<ExclamationIcon>().offset = exclamationOffset;
+                _seenPlayer = true;
+            }
+            AttackBehavior();
+        }
+
     }
 
     public bool IsAttackMode()
@@ -92,6 +105,9 @@ public class Enemy : MonoBehaviour
 
     private void IdleBehavior()
     {
+        if (!eAgent)
+            return;
+        
         if (eAgent.remainingDistance < 0.7f)
         {
             Vector3 idleTarget = _originalPosition + Random.insideUnitSphere * idleDistance;
@@ -110,12 +126,10 @@ public class Enemy : MonoBehaviour
 
     protected virtual void StandardMovement()
     {
-        print("Not implemented!");
     }
 
     protected virtual void SpecificDeath()
     {
-        print("Not implemented!");     
     }
     
     private void BaseDeath()
@@ -131,7 +145,6 @@ public class Enemy : MonoBehaviour
 
         if (!_dead)
         {
-            print("Did play?");
             AudioPlayer.ap.PlayExplosionSound();
             smoke.Play();
             _dead = true;

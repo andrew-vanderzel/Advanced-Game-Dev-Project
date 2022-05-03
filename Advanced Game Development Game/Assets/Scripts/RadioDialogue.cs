@@ -52,7 +52,6 @@ public class RadioDialogue : MonoBehaviour
                 dialogueText.RemoveAt(0);
                 if (dialogueText.Count > 0)
                 {
-                    print("Next dialogue");
                     NextDialogue();
                     delayTimer = textEndDelay;
                     phases = TypingPhases.TYPING;

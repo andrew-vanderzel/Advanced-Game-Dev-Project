@@ -35,9 +35,10 @@ public class HeatSeekingBullet : MonoBehaviour
     {
         ExplodeBullet();
 
+        GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
         if (other.collider.CompareTag("Player"))
         {
-            other.collider.GetComponent<PlayerStats>().ChangeHealth(-10); 
+            other.collider.GetComponent<PlayerStats>().ChangeHealth(-10, true); 
         }
     }
 

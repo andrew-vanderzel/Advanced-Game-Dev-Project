@@ -29,7 +29,7 @@ public class FlyBotGun : MonoBehaviour
             return;
         
         Vector3 targetOffset = target.position;
-        targetOffset.y += 1;
+        targetOffset.y  += 1.5f;
         
         Vector3 playerDir = (targetOffset - transform.position).normalized;
         float angle = Vector3.Angle(playerDir, -transform.right);

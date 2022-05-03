@@ -79,9 +79,7 @@ public class BossBehavior : MonoBehaviour
         }
         
         float distance = Vector3.Distance(transform.parent.position, player.position);
-        print(distance);
         float speedMultiplier = timer <= 0? 1 : 0;
-        print(speedMultiplier);
         agent.enabled = state == EnemyStates.Following && eStats.Health > 0;
         
         agent.speed = 1 + speedMultiplier * 5;

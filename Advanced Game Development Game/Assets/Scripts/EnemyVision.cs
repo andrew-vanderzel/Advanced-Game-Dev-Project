@@ -15,9 +15,12 @@ public class EnemyVision : MonoBehaviour
 
     private void Update()
     {
-        Vector3 dir = (transform.position - target.position).normalized;
+        Vector3 targetOffset = target.position;
+        targetOffset.y += 0.5f;
+        
+        Vector3 dir = (transform.position - targetOffset).normalized;
         float angle = Vector3.Angle(dir, -transform.forward);
-        float distance = Vector3.Distance(transform.position, target.position);
+        float distance = Vector3.Distance(transform.position, targetOffset);
         inView = angle <= viewAngle && distance < viewDistance;
     }
 
